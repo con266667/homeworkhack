@@ -1,16 +1,12 @@
-from sklearn.externals import joblib
-from sklearn.datasets import load_digits
-from sklearn.linear_model import SGDClassifier
-
 import sys
-import os, os.path
-
+import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import Perceptron
 from sklearn.pipeline import Pipeline
 from sklearn.datasets import load_files
 from sklearn.model_selection import train_test_split
-from sklearn import metrics
+from sklearn.datasets import load_digits
+from joblib import dump, load
 from googletrans import Translator
 import pyperclip
 
@@ -35,6 +31,7 @@ clf = Pipeline([
 ])
 
 clf.fit(docs_train, y_train)
+dump(clf, 'model.joblib')
 
 sentences = res
 predicted = clf.predict(sentences)
